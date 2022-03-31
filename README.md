@@ -6,7 +6,10 @@ Reference Paper : https://arxiv.org/pdf/1910.12574.pdf
 
 Team Members :
 
-Badr Jaidi
-Oksana Kurylo
-Sneha Jhaveri
-Utkarsh Saboo
+* Badr Jaidi
+
+* Oksana Kurylo
+
+* Sneha Jhaveri
+
+* Utkarsh Saboo
