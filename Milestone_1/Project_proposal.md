@@ -33,7 +33,7 @@ To address this issue, we apply a transfer learning approach to hate speech dete
 
 1. ``Computing infrastructure``
 
-Our computing infrastructure includes use our personal computers and Google Colab.
+Our computing infrastructure includes our personal computers and Google Colab.
 
 2. DL-NLP methods
 
@@ -41,7 +41,7 @@ We will use transfer learning by fine-tuning the pre-trained BERT model on our d
 
 3. ``Framework``
 
-We will use PyTorch and BERT models from HuggingFace library.
+We will use PyTorch, FastText, and BERT models from HuggingFace library.
 
 
 ### Previous Works
