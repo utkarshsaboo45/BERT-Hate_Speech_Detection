@@ -68,6 +68,8 @@ As the research grows in this field (e.g., in SemEval-2019, one of the major tas
 
 [A BERT-Based Transfer Learning Approach for Hate Speech Detection in Online Social Media](https://arxiv.org/pdf/1910.12574.pdf)
 
+This paper talks about a transfer learning approach using the pre-trained language model BERT learned on General English Corpus (no specific domain) to enhance hate speech detection on publicly available online social media datasets. They also introduce new fine-tuning strategies to examine the effect of different embedding layers of BERT in hate speech detection.
+
 [Hate speech detection on Twitter using transfer learning](https://www.sciencedirect.com/science/article/abs/pii/S0885230822000110)
 
 This paper shows that multi-lingual models such as xlm- roberta and distil-Bert are largely able to learn the contextual information in the tweets and accurately classify hate and offensive speech.
@@ -79,11 +81,13 @@ This paper shows that multi-lingual models such as xlm- roberta and distil-Bert 
 
 *Our Answer:*
 
+To evaluate our proposed ap- proach, we use two publicly available datasets that have been annotated for racism, sexism, hate, or offensive content on Twitter.  (Can add more about the metric...)
+
 
 ### *Conclusion (optional):*
 - You can have a very brief conclusion just summarizing the goal of the proposal. (2-3 sentences max).
 
 *Our Answer:*
 
-Our main goal is to come up with an efficient model that can detect hate speech in online social media data. Since, such annotated data for social media data is medium resource, we use the approach of Transfer Learning to fine tune BERT model pre trained on General Corpus to be able to detect Hate Speech in Online Social Media without providing a huge annotated corpus of social media data.
+Our main goal is to come up with an efficient model that can detect hate speech in online social media domain data. Since, social media is a medium resource with not a lot of annotated data available, we use the approach of Transfer Learning to fine tune BERT model pre trained on General Corpus to be able to detect Hate Speech in Online Social Media without having to provide a huge annotated corpus of social media data.
 
