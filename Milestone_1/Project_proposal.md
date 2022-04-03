@@ -6,16 +6,13 @@
 
 *Our Answer:*
 
-A hate speech classification is a multi-class classification problem. 
+This problem is a hate speech classification in Online Social Media using Transfer learning.
 
 2. Please explain ``what the task entails`` (e.g., taking in as input a sequence of text from a source language and turning it into a sequence of sufficiently equivalent meaning in target language). 
 
 *Our Answer:*
 
-In this project, as baseline experiments, we use BERT in its vanilla form and train the network by freezing and unfreezing BERT embeddings using transfer learning.
-Then, we modify vanilla BERT into BERT- CNN architecture by using CNN layers on top of BERT frozen and unfrozen embeddings.
-In addition, we use transfer learning to exploit multi-lingual BERT embeddings for our task. 
-Finally, 
+In this project, we use pre-trained BERT embeddings which are trained on general corpus like Wikipedia and Book Corpus. We fine-tune this pre trained model on a few annotated social media dataset and later use the modified model for hatespeech detection in online social media domain. The basic system will take a sentence from social media as input and the output will be a class that would signify whether the sentence contained any form of hate speech or not. 
 
 ### Motivation and Contributions
 
@@ -87,4 +84,6 @@ This paper shows that multi-lingual models such as xlm- roberta and distil-Bert 
 - You can have a very brief conclusion just summarizing the goal of the proposal. (2-3 sentences max).
 
 *Our Answer:*
+
+Our main goal is to come up with an efficient model that can detect hate speech in online social media data. Since, such annotated data for social media data is medium resource, we use the approach of Transfer Learning to fine tune BERT model pre trained on General Corpus to be able to detect Hate Speech in Online Social Media without providing a huge annotated corpus of social media data.
 
