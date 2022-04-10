@@ -60,7 +60,7 @@ Our computing infrastructure includes our personal computers and Google Colab.
 
 2. ``DL-NLP methods``
 
-We use transfer learning by fine-tuning pre-trained models like vanilla BERT, BERT-CNN and BERTweet on our dataset for hate speech classification.
+We use transfer learning by fine-tuning pre-trained models like vanilla BERT, BERT-CNN, RoBERTa and BERTweet on our dataset for hate speech classification.
 To compare how better these models perform, we set `FastText` as our baseline.
 
 3. ``Framework``
@@ -71,7 +71,11 @@ We use to use `PyTorch` as our primary framework. Our models include pre-trained
 
 ### Previous Works
 
-As the research grows in the field of Hate-speech detection on social media platforms (e.g., in SemEval-2019, one of the major tasks was classifying Twitter data as either hateful or not hateful), many researchers have increasingly shifted focus toward applying Deep Learning models for this task. As a basis for our project, we referred to the following two papers:
+As the research grows in the field of Hate-speech detection on social media platforms (e.g., in SemEval-2019, one of the major tasks was classifying Twitter data as either hateful or not hateful), many researchers have increasingly shifted focus toward applying Deep Learning models for this task. As a basis for our project, we referred to the following papers:
+
+[Constructing interval variables via faceted Rasch measurement and multitask deep learning: a hate speech application](https://arxiv.org/abs/2009.10277)
+
+This paper descibes the dataset we decided to use in details. The paper also shows the methods they used to train on that data. We decided to make this a classification problem, but the authors of the paper wanted to put hatespeech on an intensity scale and made it a regression problem. The paper. They also added intermediate outputs to their architecture that they used to predict the final results.
 
 [A BERT-Based Transfer Learning Approach for Hate Speech Detection in Online Social Media](https://arxiv.org/pdf/1910.12574.pdf)
 
@@ -91,6 +95,20 @@ BERTweet is the first public largescale pre-trained language model for English T
 ### Results
 
 In this section, we present discussion on our results obtained from different models. For the purpose of acquiring some baseline benchmark results on the dataset, we have used following models: 
+
+#### FastText (baseline)
+
+This is the baseline we decided to use to compare other models. The reason we chose the FastText classifier is because it's a simple fast to train linear model.
+
+The data used to train the model (without hatespeech = 0):
+
+`Train data size: 108444`
+`Test data size: 27112`
+
+With 50 epochs and a learning rate of 0.01 gave:
+
+`Precision Score: 0.8321579133997873`
+`F1 Score: 0.7675433809887591`
 
 #### BERTweet 
 
