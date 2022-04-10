@@ -148,6 +148,19 @@ The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
 `F1 Score: 79.657`
 
+#### DistilBERT
+
+The DistilBERT model was trained for 10 epochs. These are the initial results we obtained:
+```
+              precision    recall  f1-score   support
+
+           0       0.81      0.85      0.83      2665
+           1       0.66      0.60      0.62      1292
+
+    accuracy                           0.77      3957
+   macro avg       0.73      0.72      0.73      3957
+weighted avg       0.76      0.77      0.76      3957
+```
 ---
 
 ### Challenges
@@ -156,6 +169,10 @@ The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
 Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
 
+#### DistilBERT
+
+Training this model was mostly straightforward. There were a few instances we were stuck at. We initially didn't consider the face that our dataset contained around 40k unique texts, most of which were annotated by different annotators, and were present in the dataset multiple times. Thus, our dataset consisted of multiple non-unique texts on which we trained all the models, only to get inflated F1-scores and realise that later. However, we fixed this blunder, retrained all the models and updated our results.
+Apart from that, adapting the existing code from different sources and tutorials for our task proved to be somewhat challenging since this is the first time we were dealing with training models on pre-trained embeddings. However, we successfully finished our checkpoints before submission of this milestone.
 
 ### Evaluation
 
