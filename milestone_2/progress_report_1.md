@@ -85,6 +85,7 @@ This paper shows that multi-lingual models such as `XLM-RoBERTa` and `Distil BER
 [BERTweet: A pre-trained language model for English Tweets](https://aclanthology.org/2020.emnlp-demos.2.pdf)
 
 BERTweet is the first public largescale pre-trained language model for English Tweets. This paper shows that BERTweet outperforms strong baselines RoBERTabase and XLM-Rbase, producing better performance results than the previous state-of-the-art models on three Tweet NLP tasks: Part-of-speech tagging, Named-entity recognition and text classification. The model uses the BERTbase model configuration, trained based on the RoBERTa pre-training procedure. The authors used an 80GB pre-training dataset of uncompressed texts, containing 850M Tweets (16B word tokens), where each Tweet consists of at least 10 and at most 64 word tokens.
+
 ---
 
 ### Results
@@ -93,7 +94,7 @@ In this section, we present discussion on our results obtained from different mo
 
 #### BERTweet 
 
-We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translate emotion icons into text strings,  converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate specch (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
+We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translating emotion icons into text strings, converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate specch (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
 
 `Train data size: 101316`
 `Test data size: 12665`
