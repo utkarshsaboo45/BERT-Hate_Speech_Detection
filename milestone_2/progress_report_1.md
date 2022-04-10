@@ -120,9 +120,9 @@ We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/data
 
 The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
-`Precision Score: 81.576`
-`Recall Score: 77.825`
-`F1 Score: 79.657`
+`Precision Score: 78.298`
+`Recall Score: 81.241`
+`F1 Score: 79.742`
 
 ---
 
@@ -132,6 +132,7 @@ The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
 For the baseline with BERTweet, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
 
+---
 
 ### Evaluation
 
