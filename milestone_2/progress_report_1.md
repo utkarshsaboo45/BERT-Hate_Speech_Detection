@@ -53,19 +53,35 @@ __Note__: To replicate the results in [data_description.ipynb](https://github.ub
 
 ### Engineering
 
-1. ``Computing infrastructure``
+__1. ``Computing infrastructure``__
 
 Our computing infrastructure includes our personal computers and Google Colab.
 
-2. ``DL-NLP methods``
+__2. ``DL-NLP methods``__
 
 We use transfer learning by fine-tuning pre-trained models like BERT, RoBERTa and BERTweet on our dataset for hate speech classification. To compare how well these models perform, we set `FastText` as our baseline.
 
-2.1. BERT (Fine tuning using CNN)
+_2.1 FastText_
+
+__TODO__
+
+_2.2 [BERTweet](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/BERTweet.ipynb)_
+
+In the first variant, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. We used the smaller model of BERTweet `bertweet-base`, which was trained on 850M tweets, to see the baseline that we can get with our data
+
+_2.3 [DistilBERT](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/distil_bert.ipynb)_
+
+__TODO__
+
+_2.4 BERT (Fine tuning using CNN)_
 
 In this method, we use 'bert-base-uncased' as the pretrained BERT model and then add CNN layer to the architecture as part of the fine tuning technique. The outputs of all transformer encoders are concatenated and a matrix is produced. The convolution operation is performed and the maximum value is generated for each transformer encoder by applying max pooling on the convolution output. By concatenating these values, a vector is generated which is given as input to a fully connected network. We then apply softmax on the input to get the final classification output.
 
-3. ``Framework``
+_2.5 RoBERTa_
+
+__TODO__
+
+__3. ``Framework``__
 
 We use `PyTorch` as our primary framework. Our models include pre-trained `FastText` and different variations of pretrained `BERT` from the `HuggingFace` library.
 
@@ -73,18 +89,22 @@ We use `PyTorch` as our primary framework. Our models include pre-trained `FastT
 
 ### Previous Works
 
-As the research grows in the field of Hate-speech detection on social media platforms (e.g., in SemEval-2019, one of the major tasks was classifying Twitter data as either hateful or not hateful), many researchers have increasingly shifted focus toward applying Deep Learning models for this task. As a basis for our project, we referred to the following two papers:
+As the research grows in the field of Hate-speech detection on social media platforms (e.g., in SemEval-2019, one of the major tasks was classifying Twitter data as either hateful or not hateful), many researchers have increasingly shifted focus toward applying Deep Learning models for this task. As a basis for our project, we referred to the following papers:
 
-1) [A BERT-Based Transfer Learning Approach for Hate Speech Detection in Online Social Media](https://arxiv.org/pdf/1910.12574.pdf)
+1) [Constructing interval variables via faceted Rasch measurement and multitask deep learning: a hate speech application](https://arxiv.org/abs/2009.10277)
+
+This paper descibes the dataset we decided to use in details. The paper also shows the methods they used to train on that data. We decided to make this a classification problem, but the authors of the paper wanted to put hatespeech on an intensity scale and made it a regression problem. The paper. They also added intermediate outputs to their architecture that they used to predict the final results.
+
+2) [A BERT-Based Transfer Learning Approach for Hate Speech Detection in Online Social Media](https://arxiv.org/pdf/1910.12574.pdf)
 
 This paper talks about a transfer learning approach using the pre-trained language model BERT learned on General English Corpus (no specific domain) to enhance hate speech detection on publicly available online social media datasets. They also introduce new fine-tuning strategies to examine the effect of different embedding layers of BERT in hate speech detection. Different layers of a neural network can capture different levels of syntactic and semantic information. The lower layer of the BERT model may contain more general information whereas the higher layers contain task-specific information. In this paper, they have tried multiple architectures by adding non-linear layers, Bi-LSTM layers and CNN layers after which these results are compared to baseline score.
 
-2) [Hate speech detection on Twitter using transfer learning](https://www.sciencedirect.com/science/article/abs/pii/S0885230822000110)
+3) [Hate speech detection on Twitter using transfer learning](https://www.sciencedirect.com/science/article/abs/pii/S0885230822000110)
 
 This paper shows that multi-lingual models such as `XLM-RoBERTa` and `Distil BERT ` are largely able to learn the contextual information in tweets and accurately classify hate and offensive speech.
 
 
-3) [BERTweet: A pre-trained language model for English Tweets](https://aclanthology.org/2020.emnlp-demos.2.pdf)
+4) [BERTweet: A pre-trained language model for English Tweets](https://aclanthology.org/2020.emnlp-demos.2.pdf)
 
 BERTweet is the first public largescale pre-trained language model for English Tweets. This paper shows that BERTweet outperforms strong baselines RoBERTabase and XLM-Rbase, producing better performance results than the previous state-of-the-art models on three Tweet NLP tasks: Part-of-speech tagging, Named-entity recognition and text classification. The model uses the BERTbase model configuration, trained based on the RoBERTa pre-training procedure. The authors used an 80GB pre-training dataset of uncompressed texts, containing 850M Tweets (16B word tokens), where each Tweet consists of at least 10 and at most 64 word tokens.
 
@@ -94,18 +114,38 @@ BERTweet is the first public largescale pre-trained language model for English T
 
 In this section, we present discussion on our results obtained from different models. For the purpose of acquiring some baseline benchmark results on the dataset, we have used following models: 
 
+#### FastText (baseline)
+
+This is the baseline we decided to use to compare other models. The reason we chose the FastText classifier is because it's a simple fast to train linear model.
+
+The data used to train the model (without hatespeech = 0):
+
+`Train data size: 31652`
+
+`Test data size: 7913`
+
+With 50 epochs and a learning rate of 0.01 gave:
+
+`Precision Score: 0.752`
+
+`F1 Score: 0.565`
+
 #### BERTweet 
 
 We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translating emotion icons into text strings, converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate speech (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
 
 `Train data size: 101316`
+
 `Test data size: 12665`
+
 `Dev data size: 12664`
 
 The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
 `Precision Score: 81.576`
+
 `Recall Score: 77.825`
+
 `F1 Score: 79.657`
 
 ---
@@ -114,7 +154,7 @@ The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
 #### BERTweet 
 
-For the baseline with BERTweet, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
+Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
 
 
 ### Evaluation
