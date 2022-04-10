@@ -61,7 +61,7 @@ __2. ``DL-NLP methods``__
 
 We use transfer learning by fine-tuning pre-trained models like BERT, RoBERTa and BERTweet on our dataset for hate speech classification. To compare how well these models perform, we set `FastText` as our baseline.
 
-_2.1 FastText_
+_2.1 [FastText](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/baseline-fasttext.ipynb)_
 
 __TODO__
 
