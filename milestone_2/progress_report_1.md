@@ -81,7 +81,39 @@ This paper talks about a transfer learning approach using the pre-trained langua
 
 This paper shows that multi-lingual models such as `XLM-RoBERTa` and `Distil BERT ` are largely able to learn the contextual information in tweets and accurately classify hate and offensive speech.
 
+
+[BERTweet: A pre-trained language model for English Tweets](https://aclanthology.org/2020.emnlp-demos.2.pdf)
+
+BERTweet is the first public largescale pre-trained language model for English Tweets. This paper shows that BERTweet outperforms strong baselines RoBERTabase and XLM-Rbase, producing better performance results than the previous state-of-the-art models on three Tweet NLP tasks: Part-of-speech tagging, Named-entity recognition and text classification. The model uses the BERTbase model configuration, trained based on the RoBERTa pre-training procedure. The authors used an 80GB pre-training dataset of uncompressed texts, containing 850M Tweets (16B word tokens), where each Tweet consists of at least 10 and at most 64 word tokens.
+
 ---
+
+### Results
+
+In this section, we present discussion on our results obtained from different models. For the purpose of acquiring some baseline benchmark results on the dataset, we have used following models: 
+
+#### BERTweet 
+
+We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translating emotion icons into text strings, converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate specch (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
+
+`Train data size: 101316`
+`Test data size: 12665`
+`Dev data size: 12664`
+
+The bertweet-base model was run for 3 epochs. With this model we manage to get:
+
+`Precision Score: 81.576`
+`Recall Score: 77.825`
+`F1 Score: 79.657`
+
+---
+
+### Challenges
+
+#### BERTweet 
+
+For the baseline with BERTweet, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
+
 
 ### Evaluation
 
