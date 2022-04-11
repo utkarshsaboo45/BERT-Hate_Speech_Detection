@@ -4,11 +4,11 @@
 
 Idea : We are looking to implement a BERT based Transfer Learning Approach for Hate Speech Detection in Online Social Media
 
-This week's milestone involves extending the idea and details about our project from the first milestone. During this week, we spent our time reading a few more research papers, understanding the data, studying about different flavours of BERT and finally implementing a few of them. We included the implementation of `FastText`, `BERTweet` and `DistilBERT` this week, and plan to implement `BERT (CNN for Fine Tuning)` and `RoBERTa` during the next one. We decided to use FastText as our baseline and compare it with the other models to see which one performs the best. We faced several challenges this week, especially in the Engineering part. However, we successfully completed the milestone with results better than we initially imagined.
+This week's milestone involved extending the idea and details about our project from the first milestone. During this week, we spent our time reading a few more research papers, understanding the data, studying about different flavours of BERT and finally implementing a few of them. We included the implementation of `FastText`, `BERTweet` and `DistilBERT` this week, and plan to implement `BERT (CNN for Fine Tuning)` and `RoBERTa` during the next one. We decided to use FastText as our baseline and compare it with the other models to see which one performs the best. We faced several challenges this week, especially in the Engineering part. However, we successfully completed the milestone with results better than we initially imagined.
 
 ### Results
 
-In this section, we present discussion on our results obtained from different models. For the purpose of acquiring some baseline benchmark results on the dataset, we have used following models: 
+In this section, we present the results obtained on our validation dataset from training the following models: 
 
 #### FastText (baseline)
 
