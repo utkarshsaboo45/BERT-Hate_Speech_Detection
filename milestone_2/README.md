@@ -58,6 +58,9 @@ We will update the results with the scores of `BERT (CNN for Fine Tuning)` and `
 ![hate_speech_no](hate_no.png)
 
 
+From the results of our EDA as shown above, we can clearly see that the text tagged as contains 'hate speech' use many abhorrent terms which the text without hatespeech don't contain. This gives an indication of the kind of data our models are trained on. This also shows that the BERT model's general vocabulary is not enough to detect hate speech in social media domain and we would need to fine tune those models wrt to specific domain data.
+
+
 ### See Also
 
 Reference Paper : https://arxiv.org/pdf/1910.12574.pdf
