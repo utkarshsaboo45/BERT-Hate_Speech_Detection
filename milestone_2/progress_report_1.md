@@ -177,7 +177,11 @@ Training pre-trained `vinai/bertweet-base` on training set of 31 652 tweets was 
 Training this model was mostly straightforward. There were a few instances we were stuck at. We initially didn't consider the face that our dataset contained around 40k unique texts, most of which were annotated by different annotators, and were present in the dataset multiple times. Thus, our dataset consisted of multiple non-unique texts on which we trained all the models, only to get inflated F1-scores and realise that later. However, we fixed this blunder, retrained all the models and updated our results.
 Apart from that, adapting the existing code from different sources and tutorials for our task proved to be somewhat challenging since this is the first time we were dealing with training models on pre-trained embeddings. However, we successfully finished our checkpoints before submission of this milestone.
 
-### Evaluation
+#### BERT (Fine Tuning with CNN)
+
+Currently working on fine tuning the 'bert-base uncased' model with CNN layer and have faced a couple of challenges till now. There is an issue with the compatibility of the tensor type the model expects and the type that the data loader returns. Another challenge we faced is the duplicate tweets that are present in the dataset and we are working on taking only the unique instances of each tweet in order to avoid leaking of data from train set to test set.
+
+### Evaluation Metric
 
 We use F1-scrore as the major metric to evaluate our model. We compare the F1-scores of different models on cross-platform unseen data. The one which gives the best score is the best-suited for classification of generalized social-media text
 
