@@ -71,7 +71,7 @@ We use transfer learning by fine-tuning pre-trained models like BERT, RoBERTa an
 
 _2.1 [FastText](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/baseline-fasttext.ipynb)_
 
-__TODO__
+FastText was chosen as a baseline as it's a linear model that's very easy and quick to train with good instant good results. Since it's only a linear model, the more advanced models we are going to try should perform better because of their more sofisticated understanding of language. It will be difficult for FastText to perform well since comments share a lot of vocabulary regardless of their category.
 
 _2.2 [BERTweet](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/BERTweet.ipynb)_
 
@@ -87,7 +87,7 @@ In this method, we use 'bert-base-uncased' as the pretrained BERT model and then
 
 _2.5 RoBERTa_
 
-__TODO__
+RoBERTa is different from base BERT as it is trained differently and has been shown to perform better than base BERT in benchmarks. It is also used in the UC Berkeley dataset, so we'd like to see how it will perform in our dataset. 
 
 __3. ``Framework``__
 
