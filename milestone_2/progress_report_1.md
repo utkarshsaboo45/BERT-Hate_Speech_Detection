@@ -136,19 +136,20 @@ With 50 epochs and a learning rate of 0.01 gave:
 
 We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translating emotion icons into text strings, converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate speech (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
 
-`Train data size: 101316`
+`Train data size: 31652`
 
-`Test data size: 12665`
+`Test data size: 3957`
 
-`Dev data size: 12664`
+`Dev data size: 3956`
 
-The bertweet-base model was run for 3 epochs. With this model we manage to get:
 
-`Precision Score: 81.576`
+The `bertweet-base` model was run for 5 epochs. With this model we manage to get:
 
-`Recall Score: 77.825`
+`Precision Score: 65.778`
 
-`F1 Score: 79.657`
+`Recall Score: 62.195`
+
+`F1 Score: 63.936`
 
 #### DistilBERT
 
@@ -169,7 +170,7 @@ weighted avg       0.76      0.77      0.76      3957
 
 #### BERTweet 
 
-Training pre-trained `vinai/bertweet-base` on training set of 101 316 tweets was compute-intensive. As a result, we did training with only 3 epochs to get the baseline results.
+Training pre-trained `vinai/bertweet-base` on training set of 31 652 tweets was compute-intensive. As a result, we did training with only 5 epochs to get the baseline results.
 
 #### DistilBERT
 
