@@ -43,6 +43,10 @@ weighted avg       0.76      0.77      0.76      3957
 
 We will update the results with the scores of `BERT (CNN for Fine Tuning)` and `RoBERTa` in the next milestone, and will attempt to improve the existing scores.
 
+### Word Cloud (Fetched from our dataset)
+
+![hate_speech](Hate_Speech_image.png)
+
 ### See Also
 
 Reference Paper : https://arxiv.org/pdf/1910.12574.pdf
