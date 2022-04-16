@@ -83,7 +83,7 @@ We included DistilBERT as one of the models in our bucket as this is a smaller, 
 
 _2.4 BERT Base_
 
-In this method, we use 'bert-base-uncased' as the pre trained BERT model and then fine tune with a hate speech social media data set. Extracted embeddings from BERTbase have 768 hidden dimensions. As the BERT model is pretrained on general corpora, and for our hate speech detection task we are dealing with social media content, therefore as a crucial step, we have to analyze the contextual information ex- tracted from BERT’ s pretrained layers and then fine-tune it using annotated datasets. By fine-tuning we update weights using a labeled dataset that is new to an already trained model. As an input and output, BERT takes a sequence of tokens in maximum length 512 and produces a representation of the sequence in a 768-dimensional vector.
+In this method, we use 'bert-base-uncased' as the pre trained BERT model and then fine tune with a hate speech social media data set. Extracted embeddings from BERTbase have 768 hidden dimensions. As the BERT model is pretrained on general corpora, and for our hate speech detection task we are dealing with social media content, therefore as a crucial step, we have to analyze the contextual information extracted from BERT’ s pretrained layers and then fine-tune it using annotated datasets. By fine-tuning we update weights using a labeled dataset that is new to an already trained model. As an input and output, BERT takes a sequence of tokens in maximum length 512 and produces a representation of the sequence in a 768-dimensional vector.
 
 _2.5 RoBERTa_
 
@@ -185,6 +185,24 @@ weighted avg       0.78      0.77      0.77      3957
 
 ---
 
+### Results
+
+For all the models below, we used the same dataset with the same data split :
+
+Train Data Size : 31652
+
+Test Data Size : 3957
+
+Validation Data Size : 3956
+
+| Model Name | Recall | Precision |  F1 Score   |
+| --------------- | --------------- | --------------- | --------------- |
+| FastText (Baseline) | ? | 75.2 | 56.5 |
+| BERTweet | 62.195 | 65.778 | 63.936 |
+| DistilBERT | 66 | 60 | 62 |
+| BERT Base | 62 | 74 | 68 |
+| RoBERTa| ? | ? | ? |
+
 
 ### Challenges
 
@@ -199,7 +217,7 @@ Apart from that, adapting the existing code from different sources and tutorials
 
 #### BERT Base
 
-Currently working on fine tuning the 'bert-base uncased' model with CNN layer and have faced a couple of challenges till now. There is an issue with the compatibility of the tensor type the model expects and the type that the data loader returns. Another challenge we faced is the duplicate tweets that are present in the dataset and we are working on taking only the unique instances of each tweet in order to avoid leaking of data from train set to test set. 
+We have successfully implemented the. Another challenge we faced is the duplicate tweets that are present in the dataset and we are working on taking only the unique instances of each tweet in order to avoid leaking of data from train set to test set. 
 
 ### Evaluation Metric
 
