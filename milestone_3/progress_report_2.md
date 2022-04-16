@@ -217,7 +217,7 @@ Apart from that, adapting the existing code from different sources and tutorials
 
 #### BERT Base
 
-We have successfully implemented the. Another challenge we faced is the duplicate tweets that are present in the dataset and we are working on taking only the unique instances of each tweet in order to avoid leaking of data from train set to test set. 
+In this method, we use 'bert-base-uncased' as the pretrained BERT model and then add CNN layer to the architecture as part of the fine tuning technique. The outputs of all transformer encoders are concatenated and a matrix is produced. The convolution operation is performed and the maximum value is generated for each transformer encoder by applying max pooling on the convolution output. By concatenating these values, a vector is generated which is given as input to a fully connected network. We then apply softmax on the input to get the final classification output.
 
 ### Evaluation Metric
 
