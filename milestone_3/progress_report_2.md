@@ -128,9 +128,16 @@ The data used to train the model (without hatespeech = 0):
 
 With 50 epochs and a learning rate of 0.01 gave:
 
-`Precision Score: 0.752`
+```
+              precision    recall  f1-score   support
 
-`F1 Score: 0.565`
+ __label__no       0.78      0.88      0.83      5270
+__label__yes       0.68      0.50      0.58      2643
+
+    accuracy                           0.75      7913
+   macro avg       0.73      0.69      0.70      7913
+weighted avg       0.75      0.75      0.74      7913
+```
 
 #### BERTweet 
 
@@ -183,6 +190,77 @@ The BERTBase model was trained for 3 epochs. These are the initial results we ob
 weighted avg       0.78      0.77      0.77      3957
 ```
 
+#### RoBERTa
+
+4 different implementations of RoBERTa were tried with the following paramters:
+
+- `BATCH_SIZE` : 8
+- `EPOCHS` : 1
+- `LEARNING_RATE` : 5e-5
+
+##### 1. RoBERTa base model
+
+[Link on Hugging Face](https://huggingface.co/roberta-base)
+
+```
+Training time: 12:32 minutes
+Avg validation loss: 0.45553952923627816
+Precision Score: 71.80616740088107
+Recall Score: 63.57254290171607
+F1 Score: 67.43897393462971
+```
+
+##### 2. DistilRoBERTa base model
+
+[Link on Hugging Face](https://huggingface.co/distilroberta-base)
+
+```
+Training time : 03:59 minutes
+Avg validation loss: 0.42029443046739023
+Precision Score: 74.81060606060606
+Recall Score: 61.62246489859594
+F1 Score: 67.57912745936697
+```
+
+##### 3. RoBERTa large
+
+[Link on Hugging Face](https://huggingface.co/roberta-large)
+
+```
+Training parameters: 36:23
+Avg validation loss: 0.641249378763064
+Precision Score: 0.0
+Recall Score: 0.0
+F1 Score: 0.0
+```
+
+##### 4. DistilRoBERTa finetuned on hate speech tweets 
+
+[Link on Hugging Face](https://huggingface.co/mrm8488/distilroberta-finetuned-tweets-hate-speech)
+
+```
+Training time: 03:59 minutes
+Avg validation loss: 0.42139427556145576
+Precision Score: 72.97297297297297
+Recall Score: 63.18252730109204
+F1 Score: 67.7257525083612
+```
+
+##### Final results
+
+DistilRoBERTa gives the best results, here is the classification report:
+
+```
+              precision    recall  f1-score   support
+
+           0       0.83      0.90      0.86      2674
+           1       0.75      0.62      0.68      1282
+
+    accuracy                           0.81      3956
+   macro avg       0.79      0.76      0.77      3956
+weighted avg       0.80      0.81      0.80      3956
+```
+
 ---
 
 ### Results
@@ -195,14 +273,13 @@ Test Data Size : 3957
 
 Validation Data Size : 3956
 
-| Model Name | Recall | Precision |  F1 Score   |
-| --------------- | --------------- | --------------- | --------------- |
-| FastText (Baseline) | ? | 75.2 | 56.5 |
-| BERTweet | 62.195 | 65.778 | 63.936 |
-| DistilBERT | 66 | 60 | 62 |
-| BERT Base | 62 | 74 | 68 |
-| RoBERTa| ? | ? | ? |
-
+| Model Name          | Recall | Precision | F1 Score |
+| ------------------- | ------ | --------- | -------- |
+| FastText (Baseline) | 50     | 68        | 58       |
+| BERTweet            | 62.195 | 65.778    | 63.936   |
+| DistilBERT          | 66     | 60        | 62       |
+| BERT Base           | 62     | 74        | 68       |
+| DistilRoBERTa       | 62     | 75        | 68       |
 
 ### Challenges
 
