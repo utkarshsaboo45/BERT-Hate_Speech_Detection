@@ -199,6 +199,7 @@ Validation Data Size : 3956
 | --------------- | --------------- | --------------- | --------------- |
 | FastText (Baseline) | ? | 75.2 | 56.5 |
 | BERTweet | 62.195 | 65.778 | 63.936 |
+| BERTweet_large | 62  | 77  |69 |
 | DistilBERT | 66 | 60 | 62 |
 | BERT Base | 62 | 74 | 68 |
 | RoBERTa| ? | ? | ? |
