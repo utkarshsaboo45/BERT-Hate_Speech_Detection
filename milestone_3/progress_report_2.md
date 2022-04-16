@@ -75,7 +75,7 @@ FastText was chosen as a baseline as it's a linear model that's very easy and qu
 
 _2.2 [BERTweet](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/BERTweet.ipynb)_
 
-In the first variant, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. We used the smaller model of BERTweet `bertweet-base`, which was trained on 850M tweets, to see the baseline that we can get with our data
+In the first variant, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. We used the smaller model of BERTweet `bertweet-base` (135M parameters), which was trained on 850M tweets, to see the baseline that we can get with our data. Then, we proceeded with larger  model of BERTweet `bertweet-large`, which was trained on 873M English Tweets and has 355M parameters.
 
 _2.3 [DistilBERT](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/distil_bert.ipynb)_
 
@@ -158,6 +158,22 @@ The `bertweet-base` model was run for 5 epochs. With this model we manage to get
 
 `F1 Score: 63.936`
 
+
+#### BERTweet_large
+
+The `bertweet-large` model was run for 5 epochs, but the best scores were achieved with epoch 1:
+
+```
+precision    recall  f1-score   support
+
+           0       0.82      0.91      0.86      2621
+           1       0.77      0.62      0.69      1335
+
+    accuracy                           0.81      3956
+   macro avg       0.80      0.76      0.77      3956
+weighted avg       0.81      0.81      0.80      3956
+
+```
 
 #### DistilBERT
 
@@ -277,6 +293,7 @@ Validation Data Size : 3956
 | ------------------- | ------ | --------- | -------- |
 | FastText (Baseline) | 50     | 68        | 58       |
 | BERTweet            | 62.195 | 65.778    | 63.936   |
+| BERTweet_large      | 62     | 77        |69        |
 | DistilBERT          | 66     | 60        | 62       |
 | BERT Base           | 62     | 74        | 68       |
 | DistilRoBERTa       | 62     | 75        | 68       |
