@@ -69,29 +69,60 @@ __2. ``DL-NLP methods``__
 
 We use transfer learning by fine-tuning pre-trained models like BERT, RoBERTa and BERTweet on our dataset for hate speech classification. To compare how well these models perform, we set `FastText` as our baseline.
 
-_2.1 [FastText](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/baseline-fasttext.ipynb)_
+_2.1 [FastText](../notebooks/baseline-fasttext.ipynb)_
 
 FastText was chosen as a baseline as it's a linear model that's very easy and quick to train with good instant good results. Since it's only a linear model, the more advanced models we are going to try should perform better because of their more sofisticated understanding of language. It will be difficult for FastText to perform well since comments share a lot of vocabulary regardless of their category.
 
-_2.2 [BERTweet](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/BERTweet.ipynb)_
+_2.2 [BERTweet](../notebooks/BERTweet.ipynb) and [BERTweet large](../notebooks/BERTweet_large.ipynb)_
 
 In the first variant, we decided to use transfer learning by training the entire pre-trained BERTweet model on our dataset. We used the smaller model of BERTweet `bertweet-base` (135M parameters), which was trained on 850M tweets, to see the baseline that we can get with our data. Then, we proceeded with larger  model of BERTweet `bertweet-large`, which was trained on 873M English Tweets and has 355M parameters.
 
-_2.3 [DistilBERT](https://github.ubc.ca/sneha910/COLX_585_BERT-Fine-Tuning-Hate-Speech-Detection/blob/master/notebooks/distil_bert.ipynb)_
+_2.3 [DistilBERT](../notebooks/distil_bert.ipynb)_
 
 We included DistilBERT as one of the models in our bucket as this is a smaller, faster and computationally cheaper version of Vanilla BERT, while still retaining over 95% of its performance. Since it takes less time to run, we could train it for higher number of epochs (for now, we trained our model for 10 epochs, but we will increase the number once we tune the parameters). Furthermore, DistilBERT might potentially perform even better than the other variants of BERT (it already gave a weighted F1-score of 0.76, which is pretty good), so it is definitely worth a shot comparing it with other models. We referred [this](https://colab.research.google.com/github/DhavalTaunk08/Transformers_scripts/blob/master/Transformers_multilabel_distilbert.ipynb) tutorial for implementing this model.
 
-_2.4 BERT Base_
+_2.4 [BERT Base](../notebooks/BERT_Base.ipynb)_
 
 In this method, we use 'bert-base-uncased' as the pre trained BERT model and then fine tune with a hate speech social media data set. Extracted embeddings from BERTbase have 768 hidden dimensions. As the BERT model is pretrained on general corpora, and for our hate speech detection task we are dealing with social media content, therefore as a crucial step, we have to analyze the contextual information extracted from BERT’ s pretrained layers and then fine-tune it using annotated datasets. By fine-tuning we update weights using a labeled dataset that is new to an already trained model. As an input and output, BERT takes a sequence of tokens in maximum length 512 and produces a representation of the sequence in a 768-dimensional vector.
 
-_2.5 RoBERTa_
+_2.5 [RoBERTa](../notebooks/RoBERTa.ipynb)_
 
 RoBERTa is different from base BERT as it is trained differently and has been shown to perform better than base BERT in benchmarks. It is also used in the UC Berkeley dataset, so we'd like to see how it will perform in our dataset. 
+
+Four different implementations of RoBERTa will be tried:
+
+1. [RoBERTa base](https://huggingface.co/roberta-base)
+2. [DistilRoBERTa base](https://huggingface.co/distilroberta-base)
+3. [RoBERTa large](https://huggingface.co/roberta-large)
+4. [DistilRoBERTa finedtuned on hate speech tweets](https://huggingface.co/mrm8488/distilroberta-finetuned-tweets-hate-speech)
 
 __3. ``Framework``__
 
 We use `PyTorch` as our primary framework. Our models include pre-trained `FastText` and different variations of pretrained `BERT` from the `HuggingFace` library.
+
+
+__4. ``Grid search``__
+
+For all models, grid search will be conducted in a random fashion to save time.
+
+If there are many sub-types of models to try (e.g. large, base), the parameters of the models will be kept frozen, the apparent winner will be kept for more extensive grid search. 
+
+_4.1 FastText_
+
+Since FastText is faster to train, a very extensive range of parameters were tried:
+
+- `epoch` : [10-200]
+- `lr` (Learning rate): [0.00001 - 2]
+- `wordNgrams` : [1-5]
+- `dim` (embedding dimensions) : [25 - 300]
+- `ws` (context window) : [1-20]
+
+_4.2 BERT models_
+
+BERT models are longer to train so the range of parameters is smaller:
+
+- `LEARNING_RATE` : [3e-5 - 7e-5]
+- `BATCH SIZE` : [8 - 64]
 
 ---
 
@@ -138,7 +169,6 @@ __label__yes       0.68      0.50      0.58      2643
    macro avg       0.73      0.69      0.70      7913
 weighted avg       0.75      0.75      0.74      7913
 ```
-
 #### BERTweet 
 
 We are using [ucberkeley-dlab_measuring-hate-speech](https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) as our dataset. Our dataset was normalized (translating emotion icons into text strings, converting user mentions and web/url links into special tokens @USER and HTTPURL) with internal BERTweet normalizer. Also, we kept only two categories: hate speech (1) - 46021 tweets and not hate speech (0) - 80624 tweets. Then, we split the data into train, dev, test with following size:
@@ -216,8 +246,6 @@ weighted avg       0.78      0.77      0.77      3957
 
 ##### 1. RoBERTa base model
 
-[Link on Hugging Face](https://huggingface.co/roberta-base)
-
 ```
 Training time: 12:32 minutes
 Avg validation loss: 0.45553952923627816
@@ -227,8 +255,6 @@ F1 Score: 67.43897393462971
 ```
 
 ##### 2. DistilRoBERTa base model
-
-[Link on Hugging Face](https://huggingface.co/distilroberta-base)
 
 ```
 Training time : 03:59 minutes
@@ -240,8 +266,6 @@ F1 Score: 67.57912745936697
 
 ##### 3. RoBERTa large
 
-[Link on Hugging Face](https://huggingface.co/roberta-large)
-
 ```
 Training parameters: 36:23
 Avg validation loss: 0.641249378763064
@@ -251,8 +275,6 @@ F1 Score: 0.0
 ```
 
 ##### 4. DistilRoBERTa finetuned on hate speech tweets 
-
-[Link on Hugging Face](https://huggingface.co/mrm8488/distilroberta-finetuned-tweets-hate-speech)
 
 ```
 Training time: 03:59 minutes
@@ -276,6 +298,11 @@ DistilRoBERTa gives the best results, here is the classification report:
    macro avg       0.79      0.76      0.77      3956
 weighted avg       0.80      0.81      0.80      3956
 ```
+
+Optimized with hyperparameters:
+- `BEST EPOCH` : 1 (out of 3)
+- `BATCH_SIZE` : 64
+- `LEARNING_RATE` : 5e-5
 
 ---
 
