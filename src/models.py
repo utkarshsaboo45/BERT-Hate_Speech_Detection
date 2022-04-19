@@ -9,10 +9,15 @@ from transformers import DistilBertModel, DistilBertTokenizer
 
 
 DISTIL_MODEL_NAME = "distilbert-base-uncased"  # "distilbert-base-uncased-finetuned-sst-2-english"
-TOKENIZER = DistilBertTokenizer.from_pretrained(DISTIL_MODEL_NAME, truncation=True, do_lower_case=True)
+DISTIL_TOKENIZER = DistilBertTokenizer.from_pretrained(DISTIL_MODEL_NAME, truncation=True, do_lower_case=True)
 
-def get_distil_tokenizer():
-    return TOKENIZER
+def get_distil_hyperparams():
+    return {
+        "BATCH_SIZE": 16,
+        "MAX_LEN": 128,
+        "LEARNING_RATE": 1e-05,
+        "TOKENIZER": DISTIL_TOKENIZER
+    }
 
 class HateDataset(Dataset):
 
