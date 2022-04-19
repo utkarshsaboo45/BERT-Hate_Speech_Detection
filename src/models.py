@@ -3,8 +3,16 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
+
 from sklearn.preprocessing import OneHotEncoder
-from transformers import DistilBertModel
+from transformers import DistilBertModel, DistilBertTokenizer
+
+
+DISTIL_MODEL_NAME = "distilbert-base-uncased"  # "distilbert-base-uncased-finetuned-sst-2-english"
+TOKENIZER = DistilBertTokenizer.from_pretrained(DISTIL_MODEL_NAME, truncation=True, do_lower_case=True)
+
+def get_distil_tokenizer():
+    return TOKENIZER
 
 class HateDataset(Dataset):
 
@@ -43,7 +51,7 @@ class HateDataset(Dataset):
         }
 
 class DistilBERTMultiClass(nn.Module):
-    def __init__(self, n_classes, model_name):
+    def __init__(self, n_classes, model_name=DISTIL_MODEL_NAME):
         super(DistilBERTMultiClass, self).__init__()
         self.l1 = DistilBertModel.from_pretrained(model_name)
         self.pre_classifier = nn.Linear(768, 768)
