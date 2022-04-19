@@ -10,13 +10,33 @@ from transformers import DistilBertModel, DistilBertTokenizer
 
 DISTIL_MODEL_NAME = "distilbert-base-uncased"  # "distilbert-base-uncased-finetuned-sst-2-english"
 DISTIL_TOKENIZER = DistilBertTokenizer.from_pretrained(DISTIL_MODEL_NAME, truncation=True, do_lower_case=True)
+DISTIL_TRAIN_BATCH_SIZE = 16
+DISTIL_DEV_BATCH_SIZE = 1
+DISTIL_TEST_BATCH_SIZE = 1
 
 def get_distil_hyperparams():
     return {
-        "BATCH_SIZE": 16,
         "MAX_LEN": 128,
         "LEARNING_RATE": 1e-05,
-        "TOKENIZER": DISTIL_TOKENIZER
+        "TOKENIZER": DISTIL_TOKENIZER,
+        "DEVICE": torch.device("cuda:0") if torch.cuda.is_available() else "cpu",
+        "TRAIN_PARAMS": {
+            "batch_size": DISTIL_TRAIN_BATCH_SIZE,
+            "shuffle": True,
+            "num_workers": 0
+        },
+        "DEV_PARAMS": {
+            "batch_size": DISTIL_DEV_BATCH_SIZE,
+            "shuffle": False,
+            "num_workers": 0
+        },
+        "TEST_PARAMS": {
+            "batch_size": DISTIL_TEST_BATCH_SIZE,
+            "shuffle": False,
+            "num_workers": 0
+        },
+        "MODEL_PATH": "../models/pytorch_distilbert.bin",
+        "VOCAB_PATH": "../models/vocab_distilbert.bin"
     }
 
 class HateDataset(Dataset):
@@ -72,3 +92,4 @@ class DistilBERTMultiClass(nn.Module):
         pooler = self.dropout(pooler)
         output = self.classifier(pooler)
         return output
+
