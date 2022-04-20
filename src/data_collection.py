@@ -42,3 +42,22 @@ def get_data(dataset_name="ucberkeley-dlab/measuring-hate-speech", columns=["tex
 
     print("Done!")
     return data
+
+
+def clean_text(text):
+    BAD_WORDS = {
+        "nigga": "n***a",
+        "fuck": "f**k",
+        "bitch": "b***h",
+        "dick": "d**k",
+        "cock": "c**k",
+        "ass": "a**",
+        "pussy": "p***y",
+        "sex": "s**",
+        "nigger": "n****r",
+        "faggot": "f****t"
+    }
+    text = text.lower()
+    for word, replacement in BAD_WORDS.items():
+        text = text.replace(word, replacement)
+    return text
