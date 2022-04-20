@@ -55,7 +55,17 @@ def clean_text(text):
         "pussy": "p***y",
         "sex": "s**",
         "nigger": "n****r",
-        "faggot": "f****t"
+        "faggot": "f****t",
+        "slut": "s**t",
+        "shit": "s**t",
+        "retard": "r****d",
+        "killed": "k****d",
+        "suck": "s**k",
+        "hoe": "h**",
+        "ugly": "u**y",
+        "nazi": "n**i",
+        "cunt": "c**t",
+        "cum": "c**"
     }
     text = text.lower()
     for word, replacement in BAD_WORDS.items():
