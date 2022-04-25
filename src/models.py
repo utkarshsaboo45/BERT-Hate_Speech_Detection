@@ -41,6 +41,20 @@ def get_distil_hyperparams():
         "VOCAB_PATH": "../models/vocab_distilbert.bin"
     }
 
+
+def get_bertweet_hyperparams():
+    return {
+        "MODEL_NAME": "vinai/bertweet-large",
+        "BATCH_SIZE": 1,
+        "MODEL_PATH": "../models/bertweet_large_pkl"
+    }
+
+
+def get_roberta_hyperparams():
+    return {
+        "MODEL_PATH": "../models/roberta.model"
+    }
+
 class HateDataset(Dataset):
 
     def __init__(self, dataframe, tokenizer, max_len):
