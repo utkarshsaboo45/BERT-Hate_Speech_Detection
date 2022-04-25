@@ -153,7 +153,7 @@ def prepare_dataloaders(test_df, model_name, batch_size):
     return test_dataloader
 
 
-def predict_bert_tweet(model, loader, device):
+def predict_bert_tweet_roberta(model, loader, device):
     model.to(device)
     model.eval()
     preds = []
@@ -170,7 +170,6 @@ def predict_bert_tweet(model, loader, device):
             logits = outputs.logits
 
         logits = logits.detach().cpu().numpy()
-        for logit in logits:
-            preds.append(logit)
+        preds.extend(logits)
 
     return preds
