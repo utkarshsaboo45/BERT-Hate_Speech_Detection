@@ -2,10 +2,12 @@ import numpy as np
 
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader, TensorDataset, SequentialSampler
 
 from sklearn.preprocessing import OneHotEncoder
-from transformers import DistilBertModel, DistilBertTokenizer
+from transformers import DistilBertModel, DistilBertTokenizer, AutoTokenizer
+
+from tqdm import tqdm
 
 
 DISTIL_MODEL_NAME = "distilbert-base-uncased"  # "distilbert-base-uncased-finetuned-sst-2-english"
@@ -93,3 +95,82 @@ class DistilBERTMultiClass(nn.Module):
         output = self.classifier(pooler)
         return output
 
+
+def predict_distilbert(model, loader, device):
+    model.to(device)
+    model.eval()
+    fin_outputs = []
+    with torch.no_grad():
+        for _, data in tqdm(enumerate(loader)):
+            ids = data["ids"].to(device, dtype=torch.long)
+            mask = data["mask"].to(device, dtype=torch.long)
+            token_type_ids = data["token_type_ids"].to(device, dtype=torch.long)
+            outputs = model(ids, mask, token_type_ids)
+            fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
+    return fin_outputs
+
+
+def encode_data(df, tokenizer):
+    input_ids = []
+    attention_masks = []
+    for tweet in df[["text"]].values:
+        tweet = tweet.item()
+        encoded_data = tokenizer.encode_plus(
+                            tweet,                      
+                            add_special_tokens = True,  
+                            max_length = 128,
+                            padding = 'max_length',
+                            truncation = True,
+                            return_attention_mask = True,   
+                            return_tensors = 'pt',    
+                    )
+        input_ids.append(encoded_data['input_ids'])
+        attention_masks.append(encoded_data['attention_mask'])
+    input_ids = torch.cat(input_ids, dim=0)
+    attention_masks = torch.cat(attention_masks, dim=0)
+
+    inputs = {
+        'input_ids': input_ids,
+        'input_mask': attention_masks
+    }
+    return inputs
+
+
+def prepare_dataloaders(test_df, model_name, batch_size):
+    tokenizer = AutoTokenizer.from_pretrained(model_name,use_fast=False, normalization=True)
+
+    data_test = encode_data(test_df, tokenizer)
+
+    input_ids, attention_masks = data_test.values()
+    test_dataset = TensorDataset(input_ids, attention_masks)
+
+    test_dataloader = DataLoader(
+        test_dataset, 
+        sampler = SequentialSampler(test_dataset), 
+        batch_size = batch_size
+    )
+
+    return test_dataloader
+
+
+def predict_bert_tweet(model, loader, device):
+    model.to(device)
+    model.eval()
+    preds = []
+
+    for batch in loader:
+        b_input_ids = batch[0].to(device)
+        b_input_mask = batch[1].to(device)
+        with torch.no_grad():        
+            outputs = model(
+                b_input_ids, 
+                token_type_ids=None, 
+                attention_mask=b_input_mask
+            )
+            logits = outputs.logits
+
+        logits = logits.detach().cpu().numpy()
+        for logit in logits:
+            preds.append(logit)
+
+    return preds
